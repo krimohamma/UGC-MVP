@@ -40,12 +40,18 @@ export function logMoneyEvent(event: {
  * itself, only whether the expected params were present.
  */
 export function logAuthEvent(event: {
-  action: "confirmRender" | "confirmRedeem" | "signupProfileInsert";
+  action:
+    | "confirmRender"
+    | "confirmRedeem"
+    | "signupProfileInsert"
+    | "signupFailed"
+    | "auth_signup_existing_email";
   outcome: "success" | "failure";
   otpType?: string;
   next?: string;
   hasTokenHash?: boolean;
   userAgent?: string;
+  actorId?: string; // auth.users id — never log the email itself
   error?: string;
   errorCode?: string;
 }) {

@@ -59,10 +59,12 @@ export async function signup(formData: FormData) {
   });
 
   if (error || !data.user) {
-    redirect({
-      href: `/signup?error=${encodeURIComponent(error?.message ?? "signupFailed")}`,
-      locale,
-    });
+    // Never surface Supabase's raw auth-error text — it isn't one of our
+    // translated codes, so the signup page's fallback rendering would show
+    // it to the user verbatim. Generic message to the UI; real detail only
+    // in the log.
+    logAuthEvent({ action: "signupFailed", outcome: "failure", error: error?.message ?? "no user returned" });
+    redirect({ href: "/signup?error=signupFailed", locale });
     return;
   }
 
@@ -76,6 +78,24 @@ export async function signup(formData: FormData) {
   // Supabase's own trusted signUp() response, never client input — see
   // lib/supabase/admin.ts's doc comment and 0002_rls_policies.sql's
   // users_insert_self comment, which flagged this exact scenario in advance.
+  //
+  // signUp() intentionally succeeds for an email that's already registered
+  // (enumeration safety — see Supabase's own docs: re-signing up with an
+  // existing email returns an "obfuscated user" and no new row), so this
+  // insert can collide in two distinct, both-benign shapes that must NOT
+  // surface as an error:
+  //   (a) same id already present — a repeat signup attempt for the same
+  //       still-unconfirmed account (violates users_pkey).
+  //   (b) a DIFFERENT id with the SAME email — signUp() returned an
+  //       obfuscated user for an email that's already registered to someone
+  //       else's real account (violates users_email_key, not users_pkey);
+  //       this is the exact production bug ("duplicate key value violates
+  //       unique constraint users_email_key").
+  // Either way: no new row is needed (the real profile already exists),
+  // and the user must see the *same* generic "check your email" outcome
+  // as a genuine new signup — anything else (an error banner, a different
+  // message) would let an attacker distinguish "exists" from "doesn't"
+  // by trying to sign up with an email and reading the response.
   const adminClient = createAdminClient();
   const { error: profileError } = await adminClient.from("users").insert({
     id: data.user.id,
@@ -87,13 +107,29 @@ export async function signup(formData: FormData) {
   });
 
   if (profileError) {
+    if (profileError.code === "23505") {
+      // Classify for the log only (never the raw message/details — both
+      // embed the actual email value, e.g. "Key (email)=(...) already
+      // exists" — so only derive a safe boolean from them, don't log them).
+      const isEmailConflict = profileError.details?.includes("email") ?? false;
+      logAuthEvent({
+        action: "auth_signup_existing_email",
+        outcome: "success",
+        actorId: data.user.id,
+        error: isEmailConflict ? "email conflict (different id)" : "repeat signup (same id)",
+      });
+      redirect({ href: "/login?signup=success", locale });
+      return;
+    }
+
     logAuthEvent({
       action: "signupProfileInsert",
       outcome: "failure",
+      actorId: data.user.id,
       error: profileError.message,
       errorCode: profileError.code,
     });
-    redirect({ href: `/signup?error=${encodeURIComponent(profileError.message)}`, locale });
+    redirect({ href: "/signup?error=signupFailed", locale });
     return;
   }
 
