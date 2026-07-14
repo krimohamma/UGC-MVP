@@ -103,18 +103,23 @@ async function renderConfirmPage(params: {
   });
 }
 
-function errorRedirect(origin: string, locale: "fr" | "ar", type: string | null) {
+// `status` is always passed explicitly by the caller rather than left to
+// NextResponse.redirect's default — GET callers pass 307 (fine: the
+// follow-up request stays a GET either way, since GET->307 replays as GET),
+// POST callers must pass 303 (see the POST handler's own comment for why
+// this isn't optional there).
+function errorRedirect(origin: string, locale: "fr" | "ar", type: string | null, status: 307 | 303) {
   // Send the user somewhere that can actually do something about it: a
   // recovery link failure should offer "request a new one" (forgot-password),
   // a signup confirmation failure should offer "sign up again" (signup) —
   // a bare login error is a dead end for either case.
   if (type === "recovery") {
-    return NextResponse.redirect(`${origin}/${locale}/forgot-password?error=linkExpired`);
+    return NextResponse.redirect(`${origin}/${locale}/forgot-password?error=linkExpired`, status);
   }
   if (type === "email" || type === "signup") {
-    return NextResponse.redirect(`${origin}/${locale}/signup?error=confirmationExpired`);
+    return NextResponse.redirect(`${origin}/${locale}/signup?error=confirmationExpired`, status);
   }
-  return NextResponse.redirect(`${origin}/${locale}/login?error=auth_confirm_failed`);
+  return NextResponse.redirect(`${origin}/${locale}/login?error=auth_confirm_failed`, status);
 }
 
 // GET: render the button page only. Never redeems the token.
@@ -141,7 +146,10 @@ export async function GET(request: NextRequest) {
       userAgent,
       error: "legacy code param, no token_hash",
     });
-    return errorRedirect(origin, locale, type);
+    // 307 (explicit, not the default left implicit): originates from a GET,
+    // so the browser's follow-up request is a GET either way — no PRG
+    // concern here, unlike the POST handler's redirects below.
+    return errorRedirect(origin, locale, type, 307);
   }
 
   if (!token_hash || !type) {
@@ -154,7 +162,7 @@ export async function GET(request: NextRequest) {
       userAgent,
       error: "missing token_hash or type",
     });
-    return errorRedirect(origin, locale, type);
+    return errorRedirect(origin, locale, type, 307);
   }
 
   logAuthEvent({
@@ -190,7 +198,8 @@ export async function POST(request: NextRequest) {
       userAgent,
       error: "missing token_hash or type",
     });
-    return errorRedirect(origin, locale, type);
+    // 303 converts POST->GET (PRG pattern); 307 would replay the POST and 405.
+    return errorRedirect(origin, locale, type, 303);
   }
 
   // token_hash may arrive prefixed "pkce_" (seen in real production links,
@@ -217,7 +226,8 @@ export async function POST(request: NextRequest) {
       error: error.message,
       errorCode: error.code,
     });
-    return errorRedirect(origin, locale, type);
+    // 303 converts POST->GET (PRG pattern); 307 would replay the POST and 405.
+    return errorRedirect(origin, locale, type, 303);
   }
 
   logAuthEvent({
@@ -238,8 +248,12 @@ export async function POST(request: NextRequest) {
   // has no such requirement, so it keeps the sanitized `next` (with a
   // fallback to the bare locale homepage, not the dashboard, since we
   // shouldn't assume where an unknown/missing `next` should land).
+  // 303 converts POST->GET (PRG pattern); 307 would replay the POST and 405
+  // against a destination page that only serves GET (this was a real
+  // production bug: verifyOtp succeeded, then the browser 405'd here,
+  // because NextResponse.redirect defaults to 307 when no status is given).
   if (type === "recovery") {
-    return NextResponse.redirect(`${origin}/${locale}/reset-password`);
+    return NextResponse.redirect(`${origin}/${locale}/reset-password`, 303);
   }
-  return NextResponse.redirect(`${origin}${next ?? `/${locale}`}`);
+  return NextResponse.redirect(`${origin}${next ?? `/${locale}`}`, 303);
 }
