@@ -39,6 +39,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   // `auth` is excluded because Supabase email links must hit a stable,
-  // non-locale-prefixed URL (app/auth/callback/route.ts).
+  // non-locale-prefixed URL (app/auth/confirm/route.ts).
   matcher: ["/((?!api|trpc|_next|_vercel|auth|.*\\..*).*)"],
 };

@@ -13,7 +13,14 @@ export default async function SignupPage({
   // Known validation error codes (from lib/validation/auth.ts) get a
   // localized message; anything else (e.g. Supabase's own signUp() error
   // text) is shown as-is — see CLAUDE.md's i18n section on that gap.
-  const knownErrorCodes = ["required", "invalidEmail", "passwordTooShort", "invalidRole", "signupFailed"];
+  const knownErrorCodes = [
+    "required",
+    "invalidEmail",
+    "passwordTooShort",
+    "invalidRole",
+    "signupFailed",
+    "confirmationExpired",
+  ];
   const errorMessage = params.error
     ? knownErrorCodes.includes(params.error)
       ? t(`errors.${params.error}`)

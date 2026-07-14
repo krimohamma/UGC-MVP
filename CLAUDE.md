@@ -65,6 +65,8 @@ Three user roles: `creator`, `brand`, `admin`. A user has exactly one role.
   * Deliberately not built this session (flagging, not fixing): `gigs.orders_count` is still never incremented anywhere in the app — a pre-existing gap noticed while fixing the rating display, unrelated to reviews specifically. Disputes are created and now notify admins, but there's no dedicated `/admin/disputes` page yet to view/resolve them — only the notification. New chat messages don't generate notifications (deliberate — realtime chat already surfaces them live to anyone viewing the thread; adding a notification row per message risked being pure noise).
   * **This session's work was built but not run through `scripts/verify-lifecycle.ts`** — closed in the next entry below.
 * **Reviews/notifications/payouts verified end-to-end, `scripts/verify-lifecycle.ts` extended (2026-07-14)**: verification-only session, no new features, no schema changes. Extended the script (still can't import `lib/notify.ts`/`lib/actions/*.ts` directly — they transitively hit `server-only` and `next/headers`/`next/cache`, none of which function outside a live Next.js request, the same constraint that already shaped every other step; new coverage mirrors DB effects the same way the existing steps do) with: both review directions on a completed order, duplicate/non-participant/non-completed-order rejections, and an exact-value assertion that `creator_profiles.rating_avg`/`rating_count` and the gig's `avg_rating` match the actual inserted rating (not just non-null) — confirming `submitReview`'s recompute is full-aggregate-from-reviews (a fresh `SELECT`-then-`UPDATE` each time), not incremental, so no code change was needed (the task's fix was conditional on incremental; noting for the record that the `SELECT`-then-`UPDATE` pair is still two round-trips, not one atomic statement, so a narrow concurrent-write race is theoretically possible — a different, milder risk than the incremental-drift failure mode the task was checking for, and not something this session was asked to close). Also added the full payout request/process flow (creator submits, negative checks that creator/brand/an unrelated second brand can't touch or even see someone else's payout via RLS, admin processes it, ledger reconciles exactly against the order's price/commission snapshot) and notification assertions after every lifecycle event (escrow confirm, delivery submit/approve, order completion, escrow release, both reviews, payout processed) — each checks the stored `title`/`body` against `messages/{locale}.json` read directly off disk for the recipient's *own* locale (test creator is `ar`, test brand is `fr`, proving recipient-locale resolution) and that the recipient can read it while an unrelated party cannot. Ran the complete script twice in a row against the live project: **all 41 steps passed both times** with no fixes required (unlike the prior two verification sessions, which each found and fixed real bugs) — teardown correctly resets `creator_profiles.rating_avg`/`rating_count` between runs (confirmed via `pg_constraint`: `reviews.order_id` cascades from `orders`; `payouts`/`notifications` don't cascade from anything else torn down, since the test users themselves are persistent fixtures never deleted, so both got explicit teardown cleanup this session). `get_advisors` re-run after: unchanged, still zero findings beyond the two accepted WARNs. Phase 3/4 headers below updated from "(Completed)" to "(Verified end-to-end 2026-07-14)" — that's the actual date this ran clean, not the date the features were built.
+* **Launch preparation / production hardening (2026-07-15)**: git repo initialized (had none before) and given its first commit; audited that no service-role client is reachable from client code (clean). Built: password reset (forgot/reset-password pages, originally on `exchangeCodeForSession` — see the next entry for why that was wrong), a real static+ISR homepage (hero, how-it-works, live featured gigs, CTA), `/terms`+`/privacy` (fr content with `[À COMPLÉTER]` markers on legally-sensitive sections, ar stub), error/404 pages, Vercel Analytics, structured `MONEY_EVENT` logging on every money-moving action, and the Admin Operations Runbook (above). Found and fixed a real rendering bug while verifying the homepage requirement ("static + revalidate, no client JS beyond the locale switcher"): it built as `ƒ` (fully dynamic) despite `revalidate = 300`, because `next-intl`'s static-rendering support needs `setRequestLocale(locale)` called in *every* layout in the route, not just the root one — `app/[locale]/(public)/layout.tsx` (which renders the shared `SiteHeader`) wasn't calling it, so any `getTranslations()` call downstream fell through to reading `headers()` (a Next.js Dynamic API), tainting the whole route. Fixed by making that layout call `setRequestLocale`, and by splitting `SiteHeader`'s auth-dependent nav into a client-side island (`components/site-header-auth.tsx`) so the header no longer calls `cookies()` server-side on every page — confirmed via `next build`'s route table, `/[locale]` now shows `●` (SSG, `Revalidate 5m`). Ran `scripts/verify-lifecycle.ts` against the live project: 42/42 passed, teardown clean. Supabase advisor could not be re-checked that session (connector was unauthenticated) — see the next entry for the check that finally happened.
+* **Production bug: password-reset link always failed (`auth_callback_failed`) — root cause and fix (2026-07-15)**: reported by the user testing the (now deployed, at `https://ugc-mvp-two.vercel.app`) production build — clicking the emailed reset link landed on a login-page error every time. **Diagnosed from real evidence, not just theory**: pulled the live project's Auth service logs (`get_advisors`/`get_logs` via the Supabase MCP connector) and found the actual failure signature — GoTrue's own `/verify` endpoint occasionally returned `403: Email link is invalid or has expired` ("One-time token not found") for reuse/staleness reasons, but critically, **zero** `/token` requests with `grant_type=pkce` appear anywhere in the logs for the reset flow, even on attempts where GoTrue's `/verify` step itself succeeded (`303` redirect to `/auth/callback?next=/fr/reset-password`). That absence is the tell: our route's `exchangeCodeForSession(code)` call never even reached Supabase's servers — it failed locally, inside the `@supabase/ssr` client, because the PKCE `code_verifier` cookie it needs is only ever set on the browser that originally called `resetPasswordForEmail` (a Server Action, so the cookie lands on whatever browser submitted that form) — and password reset's whole point is that the link is normally opened somewhere else (request on desktop, open the email on a phone, or vice versa). **Root cause: PKCE cross-browser, confirmed empirically** — not an allow-list issue (the existing `redirectTo` was in fact reaching our route, per the `303`s in the logs). **Fix**: replaced `app/auth/callback/route.ts`'s `exchangeCodeForSession` with `app/auth/confirm/route.ts`'s `token_hash` + `supabase.auth.verifyOtp()` pattern (verified against current Supabase docs via `search_docs` before writing any code, per instruction — see the Auth section above for the exact pattern and the two required dashboard email-template edits, which are **not yet applied to the live project** — this code change alone does nothing until a human makes those two template edits and confirms the Redirect URLs wildcard). `verifyOtp` redeems the token directly from the URL with no cookie dependency, so it works regardless of which browser opens the link. Also wired `signUp()`'s `emailRedirectTo` (previously unset, meaning signup confirmation never actually routed through our app's callback at all — it silently fell back to Supabase's default Site-URL redirect) so signup now goes through the same `/auth/confirm` route as recovery, verified both `type=email` (signup) and `type=recovery` share the route correctly. Added `logAuthEvent()` (`lib/log.ts`) so this class of failure is diagnosable from Vercel's own logs going forward, not just Supabase's. New strings (`auth.login.errors.auth_confirm_failed`, `auth.signup.errors.confirmationExpired`) added to both `fr.json`/`ar.json`. `tsc`/`next build` clean.
 
 ## Database
 
@@ -238,10 +240,44 @@ global installs — see "Running locally" below for the exact commands.
 - Signup (`lib/auth/actions.ts`) picks a role (`creator` or `brand` —
   `admin` accounts are provisioned manually, not self-service) and inserts
   the `public.users` row right after `supabase.auth.signUp()`.
-- `app/auth/callback/route.ts` handles the email-confirmation redirect and
-  deliberately lives outside `app/[locale]/` — Supabase's email link must
-  point at a fixed URL, so `proxy.ts`'s matcher explicitly excludes
-  `/auth`.
+- **`app/auth/confirm/route.ts`** handles both email-confirmation and
+  password-recovery links (fixed 2026-07-15 — see History). It deliberately
+  lives outside `app/[locale]/` — Supabase's email templates embed one
+  fixed link with no locale variable, so `proxy.ts`'s matcher explicitly
+  excludes `/auth`. It uses the `token_hash` + `supabase.auth.verifyOtp()`
+  pattern (verified against current Supabase docs via the Supabase MCP
+  connector's `search_docs`, not pattern-matched from memory) — **not**
+  `exchangeCodeForSession(code)`, which this route used to call and which is
+  the wrong tool here: that PKCE flow needs a `code_verifier` cookie set on
+  the *same browser* that originally requested the email, which is never
+  true for password reset in the normal case (request on desktop, open the
+  email on a phone, or vice versa) — it silently failed with
+  `auth_callback_failed` every time the link was opened somewhere else.
+  `verifyOtp` redeems the token straight from the URL against Supabase's Auth
+  API and needs nothing from the requesting browser, so it works from any
+  device. Required Supabase dashboard edits, by hand (templates aren't in
+  SQL/migrations, and don't survive `db push`):
+  1. **Authentication → Emails → Confirm signup** template: change the link
+     to `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=email&next={{ .RedirectTo }}`.
+  2. **Authentication → Emails → Reset Password** template: change the link
+     to `{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery&next={{ .RedirectTo }}`.
+  3. **Authentication → URL Configuration → Redirect URLs**: add
+     `https://your-domain.com/**` (and `http://localhost:3000/**` for local
+     dev) — `signUp`'s `emailRedirectTo` and `resetPasswordForEmail`'s
+     `redirectTo` (both set in `lib/auth/actions.ts`, both locale-prefixed:
+     `/${locale}/dashboard`, `/${locale}/reset-password`) populate
+     `{{ .RedirectTo }}` above, and Supabase silently falls back to the Site
+     URL if that value isn't allow-listed — a wildcard is simpler than
+     enumerating both locales for both flows.
+  `/auth/confirm` picks the error destination by `type`: a failed
+  `type=recovery` verify redirects to `/forgot-password?error=linkExpired`
+  (request a new link — the only actionable thing to do), a failed
+  `type=email` verify redirects to `/signup?error=confirmationExpired`
+  (sign up again), anything else falls back to
+  `/login?error=auth_confirm_failed`. Every outcome is logged via
+  `logAuthEvent()` (`lib/log.ts`, same `AUTH_EVENT`-tag convention as
+  `logMoneyEvent`) — grep `AUTH_EVENT` in Vercel's log viewer if this class
+  of bug resurfaces.
 - Session refresh happens in `proxy.ts` (Next.js 16 renamed the `middleware`
   file convention to `proxy`), composed with the next-intl locale-routing
   logic. If you touch either, keep both halves — dropping
@@ -381,8 +417,9 @@ npx supabase gen types typescript --db-url "$SUPABASE_DB_URL" > lib/database.typ
 ```
 
 And in the Supabase dashboard, set **Authentication → URL Configuration →
-Redirect URLs** to include `http://localhost:3000/auth/callback` (and the
-production equivalent later), or email confirmation links won't come back to
+Redirect URLs** to include `http://localhost:3000/**` (and the production
+equivalent later — see the Auth section below for why a wildcard, not a
+single fixed path), or email confirmation/recovery links won't come back to
 the app correctly.
 
 ## Production Deployment
@@ -433,14 +470,29 @@ two files named above.
    custom domain once attached).
 5. **Supabase dashboard → Authentication → URL Configuration**:
    - **Site URL**: your production domain (e.g. `https://your-domain.com`).
-   - **Redirect URLs**: add `https://your-domain.com/auth/callback` alongside
-     the existing `http://localhost:3000/auth/callback` (keep both — you'll
-     still want local dev to work). This is the exact same mechanism
-     documented under "Running locally" above; production is just another
-     entry in the same allow-list, not a different mechanism.
-6. Re-test signup end-to-end against the deployed URL: the email
-   confirmation link must land back on `/auth/callback` on the *production*
-   domain, not localhost — that only works once step 5 is done.
+   - **Redirect URLs**: add `https://your-domain.com/**` alongside the
+     existing `http://localhost:3000/**` (keep both — you'll still want
+     local dev to work). A wildcard, not a single fixed path, because
+     `emailRedirectTo`/`redirectTo` now point at locale-prefixed pages
+     (`/fr/dashboard`, `/ar/reset-password`, etc.) — see the Auth section
+     below. This is the exact same mechanism documented under "Running
+     locally" above; production is just another entry in the same
+     allow-list, not a different mechanism.
+   - **Email Templates** (Authentication → Emails): both "Confirm signup"
+     and "Reset Password" need their link changed to the `token_hash` +
+     `verifyOtp` pattern — see the exact edit under the Auth section below.
+     This is a template edit, not something in SQL/migrations, so it has to
+     be done by hand in every environment (including this production
+     project) — it is **not** covered by `supabase db push` or any
+     migration.
+6. Re-test signup *and* password reset end-to-end against the deployed URL:
+   both confirmation links must land back on `/auth/confirm` on the
+   *production* domain, not localhost — that only works once steps 5 and 6
+   (the Redirect URLs wildcard and the email template edits) are both done.
+   Test the reset link by opening it in a **different browser** than the one
+   that requested it (e.g. request from a desktop browser, open the emailed
+   link on your phone) — that's the exact scenario the previous flow broke
+   on, and the one this fix exists for.
 7. Enable **Vercel Analytics** in the Vercel dashboard for this project
    (Project → Analytics tab) — the `@vercel/analytics` package is already
    wired into the root layout; the dashboard toggle is what actually turns

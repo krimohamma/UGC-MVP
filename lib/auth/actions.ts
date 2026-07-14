@@ -8,7 +8,7 @@ import { signupSchema, emailSchema, passwordSchema } from "@/lib/validation/auth
 import type { AppLocale } from "@/i18n/routing";
 
 // Server Actions don't get a `request` object the way Route Handlers do
-// (see app/auth/callback/route.ts, which derives origin from request.url
+// (see app/auth/confirm/route.ts, which derives origin from request.url
 // directly) — this reads the same info off the incoming request's headers,
 // correctly reflecting Vercel's proxy (x-forwarded-*) in production and
 // plain http/localhost in dev.
@@ -43,8 +43,18 @@ export async function signup(formData: FormData) {
   const { fullName, email, password, role } = parsed.data;
 
   const supabase = await createClient();
+  const origin = await getOrigin();
 
-  const { data, error } = await supabase.auth.signUp({ email, password });
+  // emailRedirectTo populates the {{ .RedirectTo }} template variable used
+  // by the "Confirm signup" email template (see CLAUDE.md's Auth section) —
+  // it's where /auth/confirm sends the user after a successful verifyOtp,
+  // not a URL that's hit directly. Must be in the project's Redirect URLs
+  // allow list or Supabase silently ignores it and falls back to the Site URL.
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: { emailRedirectTo: `${origin}/${locale}/dashboard` },
+  });
 
   if (error || !data.user) {
     redirect({
@@ -102,12 +112,19 @@ export async function requestPasswordReset(formData: FormData) {
   const origin = await getOrigin();
   const supabase = await createClient();
 
+  // redirectTo populates {{ .RedirectTo }} in the "Reset Password" email
+  // template (see CLAUDE.md's Auth section) — it's where /auth/confirm
+  // sends the user after a successful verifyOtp, not a URL Supabase hits
+  // directly (that's why this is /reset-password, not /auth/confirm itself).
+  // Must be in the project's Redirect URLs allow list or Supabase silently
+  // falls back to the Site URL instead.
+  //
   // Deliberately ignore the result: whether or not this address has an
   // account, always show the same "check your email" outcome. Branching on
   // success/failure here would let anyone enumerate registered emails by
   // trying addresses and watching which ones "fail".
   await supabase.auth.resetPasswordForEmail(parsed.data, {
-    redirectTo: `${origin}/auth/callback?next=/${locale}/reset-password`,
+    redirectTo: `${origin}/${locale}/reset-password`,
   });
 
   redirect({ href: "/forgot-password?sent=1", locale });
@@ -123,8 +140,9 @@ export async function updatePassword(formData: FormData) {
   }
 
   const supabase = await createClient();
-  // Requires the transient recovery session that /auth/callback established
-  // from the emailed link's code — if that's missing or expired, this fails.
+  // Requires the transient recovery session that /auth/confirm established
+  // from the emailed link's token_hash — if that's missing or expired, this
+  // fails.
   const { error } = await supabase.auth.updateUser({ password: parsed.data });
 
   if (error) {

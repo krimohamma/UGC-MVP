@@ -25,3 +25,27 @@ export function logMoneyEvent(event: {
     }),
   );
 }
+
+/**
+ * Same convention as logMoneyEvent, for the email-link confirmation flow
+ * (app/auth/confirm/route.ts). Added after a production incident where
+ * verifyOtp failures were indistinguishable from each other in the redirect
+ * alone (expired vs. already-used vs. wrong type) — grep `AUTH_EVENT` in
+ * Vercel's log viewer.
+ */
+export function logAuthEvent(event: {
+  action: "confirmEmailLink";
+  outcome: "success" | "failure";
+  otpType?: string;
+  next?: string;
+  error?: string;
+  errorCode?: string;
+}) {
+  console.log(
+    JSON.stringify({
+      tag: "AUTH_EVENT",
+      timestamp: new Date().toISOString(),
+      ...event,
+    }),
+  );
+}

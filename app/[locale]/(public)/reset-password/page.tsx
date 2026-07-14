@@ -15,8 +15,9 @@ export default async function ResetPasswordPage({
   const searchParamsResolved = await searchParams;
 
   // This page only makes sense with the transient recovery session that
-  // /auth/callback established from the emailed link's code — no session
-  // means the link was never followed correctly, already used, or expired.
+  // /auth/confirm established from the emailed link's token_hash — no
+  // session means the link was never followed correctly, already used, or
+  // expired.
   const supabase = await createClient();
   const {
     data: { user },

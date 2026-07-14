@@ -10,6 +10,17 @@ export default async function LoginPage({
   const t = await getTranslations("auth.login");
   const params = await searchParams;
 
+  // Only auth_confirm_failed is ours (from /auth/confirm's generic fallback,
+  // see CLAUDE.md's Auth section) — anything else here is Supabase's own
+  // signInWithPassword() error text shown as-is (see CLAUDE.md's i18n
+  // section on that gap).
+  const knownErrorCodes = ["auth_confirm_failed"];
+  const errorMessage = params.error
+    ? knownErrorCodes.includes(params.error)
+      ? t(`errors.${params.error}`)
+      : params.error
+    : null;
+
   return (
     <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center gap-6 px-4 py-12">
       <h1 className="text-2xl font-semibold">{t("title")}</h1>
@@ -24,9 +35,9 @@ export default async function LoginPage({
           {t("resetSuccessNotice")}
         </p>
       )}
-      {params.error && (
+      {errorMessage && (
         <p className="rounded-md bg-red-50 p-3 text-sm text-red-800 dark:bg-red-950 dark:text-red-200">
-          {params.error}
+          {errorMessage}
         </p>
       )}
 

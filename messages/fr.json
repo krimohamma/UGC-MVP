@@ -63,7 +63,10 @@
       "signupLink": "Créer un compte",
       "checkEmailNotice": "Vérifiez votre e-mail pour confirmer votre compte, puis connectez-vous.",
       "forgotPasswordLink": "Mot de passe oublié ?",
-      "resetSuccessNotice": "Mot de passe mis à jour. Vous pouvez maintenant vous connecter."
+      "resetSuccessNotice": "Mot de passe mis à jour. Vous pouvez maintenant vous connecter.",
+      "errors": {
+        "auth_confirm_failed": "Ce lien de confirmation est invalide ou a expiré."
+      }
     },
     "forgotPassword": {
       "title": "Mot de passe oublié",
@@ -103,7 +106,8 @@
         "invalidEmail": "Adresse e-mail invalide.",
         "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères.",
         "invalidRole": "Veuillez choisir un rôle valide.",
-        "signupFailed": "L'inscription a échoué. Veuillez réessayer."
+        "signupFailed": "L'inscription a échoué. Veuillez réessayer.",
+        "confirmationExpired": "Ce lien de confirmation est invalide ou a déjà été utilisé. Inscrivez-vous à nouveau ou essayez de vous connecter."
       }
     }
   },
