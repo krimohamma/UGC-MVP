@@ -34,7 +34,7 @@ export function logMoneyEvent(event: {
  * Vercel's log viewer.
  */
 export function logAuthEvent(event: {
-  action: "confirmEmailLink";
+  action: "confirmEmailLink" | "signupProfileInsert";
   outcome: "success" | "failure";
   otpType?: string;
   next?: string;

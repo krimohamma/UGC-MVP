@@ -4,7 +4,9 @@ import { getLocale } from "next-intl/server";
 import { headers } from "next/headers";
 import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { signupSchema, emailSchema, passwordSchema } from "@/lib/validation/auth";
+import { logAuthEvent } from "@/lib/log";
 import type { AppLocale } from "@/i18n/routing";
 
 // Server Actions don't get a `request` object the way Route Handlers do
@@ -64,7 +66,18 @@ export async function signup(formData: FormData) {
     return;
   }
 
-  const { error: profileError } = await supabase.from("users").insert({
+  // Service-role client, not the RLS-scoped one above: this project requires
+  // email confirmation, so signUp() doesn't establish a session in this same
+  // request — auth.uid() is null here, and users_insert_self's RLS check
+  // (auth.uid() = id) would reject the insert (this was a real production
+  // bug: signUp() succeeded, this insert 42501'd, the user ended up with an
+  // auth.users row and no public.users profile, and saw a raw error). Safe
+  // to bypass RLS here specifically because `id` is `data.user.id` from
+  // Supabase's own trusted signUp() response, never client input — see
+  // lib/supabase/admin.ts's doc comment and 0002_rls_policies.sql's
+  // users_insert_self comment, which flagged this exact scenario in advance.
+  const adminClient = createAdminClient();
+  const { error: profileError } = await adminClient.from("users").insert({
     id: data.user.id,
     role,
     email,
@@ -74,6 +87,12 @@ export async function signup(formData: FormData) {
   });
 
   if (profileError) {
+    logAuthEvent({
+      action: "signupProfileInsert",
+      outcome: "failure",
+      error: profileError.message,
+      errorCode: profileError.code,
+    });
     redirect({ href: `/signup?error=${encodeURIComponent(profileError.message)}`, locale });
     return;
   }
