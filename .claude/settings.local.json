@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude plugin *)",
+      "PowerShell(claude plugin install shopify-ai-toolkit@claude-plugins-official)",
+      "Bash(npm --version)",
+      "Bash(npx --version)",
+      "Bash(docker --version)",
+      "Bash(docker info *)",
+      "PowerShell(node --version; npm --version; npx --version 2>&1; \\(Get-Command docker -ErrorAction SilentlyContinue\\) -ne $null)",
+      "PowerShell(winget install --id OpenJS.NodeJS.LTS -e --source winget --accept-package-agreements --accept-source-agreements)",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); node --version; npm --version)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)"
+    ]
+  }
+}

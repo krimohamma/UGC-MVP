@@ -1,0 +1,423 @@
+{
+  "app": {
+    "name": "Souk"
+  },
+  "home": {
+    "heroTitle": "Des vidéos UGC authentiques pour vos publicités",
+    "heroSubtitle": "Souk connecte les marques algériennes à des créateurs de contenu vérifiés. Commandez des vidéos publicitaires style TikTok, payez en toute sécurité via un compte séquestre (escrow) confirmé par notre équipe.",
+    "ctaBrowse": "Explorer les créateurs",
+    "ctaBecomeCreator": "Devenir créateur",
+    "howItWorksBrandsTitle": "Pour les marques",
+    "brandStep1Title": "Parcourez et choisissez",
+    "brandStep1Desc": "Filtrez les créateurs par niche, langue et budget, et visionnez leur portfolio avant de commander.",
+    "brandStep2Title": "Payez en toute sécurité",
+    "brandStep2Desc": "Votre paiement est conservé en séquestre (CCP / BaridiMob) et confirmé par un administrateur avant que le travail ne commence.",
+    "brandStep3Title": "Recevez et validez",
+    "brandStep3Desc": "Le créateur livre la vidéo, notre équipe vérifie la qualité, puis vous l'approuvez ou demandez une révision.",
+    "howItWorksCreatorsTitle": "Pour les créateurs",
+    "creatorStep1Title": "Créez votre profil",
+    "creatorStep1Desc": "Présentez votre style avec un portfolio de vidéos passées, uploadées ou liées depuis TikTok/Instagram.",
+    "creatorStep2Title": "Publiez vos services",
+    "creatorStep2Desc": "Définissez vos offres (basique, standard, premium) avec vos prix, délais et révisions incluses.",
+    "creatorStep3Title": "Livrez et soyez payé",
+    "creatorStep3Desc": "Une fois la commande validée, retirez vos gains vers votre compte CCP ou BaridiMob.",
+    "featuredGigsTitle": "Services populaires",
+    "featuredGigsEmpty": "De nouveaux services arrivent bientôt.",
+    "viewAllGigs": "Voir tous les services",
+    "finalCtaTitle": "Prêt à commencer ?",
+    "finalCtaSubtitle": "Rejoignez la marketplace UGC dédiée à l'Algérie.",
+    "finalCtaButton": "Créer un compte gratuitement"
+  },
+  "errors": {
+    "title": "Une erreur est survenue",
+    "description": "Quelque chose s'est mal passé de notre côté. Vous pouvez réessayer ou revenir à l'accueil.",
+    "errorId": "Référence",
+    "retry": "Réessayer",
+    "backHome": "Retour à l'accueil",
+    "notFoundTitle": "Page introuvable",
+    "notFoundDescription": "La page que vous cherchez n'existe pas ou a été déplacée."
+  },
+  "legal": {
+    "draftNotice": "Document provisoire en attente de révision juridique — ne constitue pas encore un document légal définitif."
+  },
+  "footer": {
+    "tagline": "La marketplace UGC pour les marques et créateurs en Algérie.",
+    "browseGigs": "Explorer les services",
+    "terms": "Conditions d'utilisation",
+    "privacy": "Confidentialité"
+  },
+  "nav": {
+    "browseGigs": "Explorer les services",
+    "dashboard": "Tableau de bord",
+    "login": "Connexion",
+    "signup": "Inscription",
+    "logout": "Déconnexion"
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "noAccount": "Pas encore de compte ?",
+      "signupLink": "Créer un compte",
+      "checkEmailNotice": "Vérifiez votre e-mail pour confirmer votre compte, puis connectez-vous.",
+      "forgotPasswordLink": "Mot de passe oublié ?",
+      "resetSuccessNotice": "Mot de passe mis à jour. Vous pouvez maintenant vous connecter."
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié",
+      "instructions": "Entrez votre adresse e-mail, nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+      "emailLabel": "Adresse e-mail",
+      "submit": "Envoyer le lien de réinitialisation",
+      "checkEmailNotice": "Si un compte existe avec cette adresse, un e-mail de réinitialisation a été envoyé.",
+      "backToLogin": "Retour à la connexion",
+      "errors": {
+        "invalidEmail": "Adresse e-mail invalide.",
+        "linkExpired": "Ce lien de réinitialisation est invalide ou expiré. Redemandez-en un."
+      }
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "newPasswordLabel": "Nouveau mot de passe",
+      "submit": "Mettre à jour le mot de passe",
+      "errors": {
+        "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères.",
+        "updateFailed": "Impossible de mettre à jour le mot de passe. Réessayez."
+      }
+    },
+    "signup": {
+      "title": "Créer un compte",
+      "displayName": "Nom affiché",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "role": "Je suis...",
+      "roleCreator": "Créateur de contenu",
+      "roleBrand": "Marque / boutique",
+      "submit": "S'inscrire",
+      "legalNotice": "En vous inscrivant, vous acceptez nos <terms>Conditions d'utilisation</terms> et notre <privacy>Politique de confidentialité</privacy>.",
+      "hasAccount": "Déjà un compte ?",
+      "loginLink": "Se connecter",
+      "errors": {
+        "required": "Veuillez remplir tous les champs.",
+        "invalidEmail": "Adresse e-mail invalide.",
+        "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères.",
+        "invalidRole": "Veuillez choisir un rôle valide.",
+        "signupFailed": "L'inscription a échoué. Veuillez réessayer."
+      }
+    }
+  },
+  "dashboard": {
+    "creatorWelcome": "Tableau de bord créateur",
+    "creatorSubtitle": "Gérez votre profil, votre portfolio et vos offres de services UGC.",
+    "brandWelcome": "Bienvenue sur Souk",
+    "brandSubtitle": "Trouvez les meilleurs créateurs de contenu UGC pour votre marque en Algérie.",
+    "exploreCreators": "Explorer les créateurs UGC",
+    "brandDescription": "Découvrez des vidéos authentiques pour vos publicités TikTok, Reels et réseaux sociaux.",
+    "browseGigsBtn": "Parcourir les services",
+    "createNewGig": "Créer un nouveau service",
+    "yourGigs": "Vos offres de services",
+    "noGigsYet": "Vous n'avez pas encore publié d'offre de service.",
+    "createFirstGig": "Publier votre première offre",
+    "editGig": "Modifier"
+  },
+  "profile": {
+    "title": "Profil de créateur",
+    "noReviewsYet": "Pas encore d'avis",
+    "nicheLabel": "Domaine / Niche principale",
+    "bioLabel": "Biographie & présentation",
+    "bioPlaceholder": "Présentez-vous aux marques (ex: spécialisé(e) en vidéos beautés authentiques pour TikTok)...",
+    "experienceLabel": "Années d'expérience",
+    "saveProfile": "Enregistrer le profil",
+    "profileSaved": "Profil mis à jour avec succès !",
+    "saveFailed": "Erreur lors de l'enregistrement.",
+    "saving": "Enregistrement...",
+    "payoutTitle": "Compte de versement (Paiement)",
+    "payoutSubtitle": "Informations CCP ou BaridiMob pour recevoir vos gains.",
+    "methodLabel": "Moyen de paiement",
+    "accountHolder": "Nom du titulaire du compte",
+    "accountHolderPlaceholder": "Nom complet tel qu'il apparaît sur votre chèque ou RIP",
+    "accountNumber": "Numéro de compte (CCP ou RIP BaridiMob)",
+    "accountNumberPlaceholder": "Ex: 00799999000000000000 ou RIP BaridiMob",
+    "savePayout": "Enregistrer les informations de paiement",
+    "payoutSaved": "Compte de paiement enregistré !",
+    "errors": {
+      "nicheRequired": "Veuillez sélectionner une niche.",
+      "required": "Champ requis.",
+      "digitsOnly": "Doit contenir uniquement des chiffres et espaces."
+    }
+  },
+  "portfolio": {
+    "addTitle": "Ajouter un élément au portfolio",
+    "addSubtitle": "Mettez en valeur vos réalisations vidéo passées.",
+    "itemTitle": "Titre du projet (optionnel)",
+    "itemTitlePlaceholder": "Ex: Vidéo Skincare pour Marque X",
+    "sourceType": "Type de contenu",
+    "uploadVideo": "Téléverser une vidéo",
+    "externalLink": "Lien TikTok / Instagram",
+    "selectVideoFile": "Fichier vidéo ou image",
+    "uploadLimitNotice": "Formats supportés : MP4, MOV, WebM, WebP, PNG, JPG (Max 100 Mo)",
+    "linkUrl": "Lien de la vidéo originale",
+    "addItem": "Ajouter au portfolio",
+    "adding": "Ajout en cours...",
+    "addFailed": "Impossible d'ajouter l'élément.",
+    "yourPortfolio": "Votre Portfolio",
+    "emptyPortfolio": "Aucun exemple dans votre portfolio pour le moment.",
+    "untitledItem": "Extrait portfolio",
+    "externalBadge": "Lien externe",
+    "uploadBadge": "Fichier stocké",
+    "delete": "Supprimer",
+    "confirmDelete": "Voulez-vous vraiment supprimer cet élément de votre portfolio ?",
+    "errors": {
+      "validUrlRequired": "Veuillez entrer une URL valide (http/https)."
+    }
+  },
+  "gigForm": {
+    "createGigTitle": "Créer une nouvelle offre de service",
+    "editGigTitle": "Modifier l'offre de service",
+    "generalSection": "Information générale",
+    "titleLabel": "Titre de l'offre",
+    "titlePlaceholder": "Ex: Je vais créer 1 vidéo UGC authentique pour votre produit cosmétique",
+    "nicheLabel": "Niche",
+    "languagesLabel": "Langue(s) parlée(s) dans les vidéos",
+    "descriptionLabel": "Description détaillée",
+    "descriptionPlaceholder": "Décrivez précisément ce que vous proposez, votre méthode de travail et ce que recevra le client...",
+    "coverLabel": "Image de couverture (Optionnel)",
+    "statusLabel": "Statut de l'offre",
+    "statusDraft": "Brouillon (Masqué)",
+    "statusActive": "Actif (Visible)",
+    "statusPaused": "En pause",
+    "packagesSection": "Offres & Formules (3 Formules)",
+    "packagesNotice": "Configurez obligatoirement les 3 formules (Essentiel, Standard, Premium). Les prix doivent être des entiers en DZD.",
+    "pkgTitle": "Titre de la formule",
+    "pkgDesc": "Description rapide",
+    "priceDzd": "Prix (DZD)",
+    "deliveryDays": "Délai (jours)",
+    "revisions": "Révisions",
+    "cancel": "Annuler",
+    "saveGig": "Enregistrer l'offre",
+    "saving": "Sauvegarde...",
+    "submitFailed": "Impossible d'enregistrer le service.",
+    "errors": {
+      "languageRequired": "Sélectionnez au moins une langue.",
+      "noDecimalsAllowed": "Les centimes ne sont pas acceptés. Prix en dinars entiers."
+    }
+  },
+  "gigs": {
+    "browseTitle": "Explorer les services UGC",
+    "browseSubtitle": "Commandez des créations vidéo personnalisées auprès des créateurs algériens.",
+    "browseEmpty": "Aucun service ne correspond à vos critères de recherche.",
+    "filterNiche": "Niche",
+    "allNiches": "Toutes les niches",
+    "filterLanguage": "Langue du contenu",
+    "allLanguages": "Toutes les langues",
+    "priceRange": "Prix (DZD)",
+    "maxDelivery": "Délai de livraison",
+    "anyTime": "Tous les délais",
+    "resetFilters": "Réinitialiser les filtres"
+  },
+  "gigDetail": {
+    "descriptionTitle": "À propos de ce service",
+    "ordersCompleted": "Commandes réalisées",
+    "experience": "Expérience",
+    "years": "ans",
+    "portfolioTitle": "Extraits du portfolio du créateur",
+    "deliveryTime": "Délai de livraison",
+    "revisions": "Révisions incluses",
+    "days": "jours",
+    "whatsIncluded": "Ce qui est inclus",
+    "orderNow": "Commander ce service",
+    "phase3Notice": "Disponible en Phase 3",
+    "orderNote": "Le paiement sécurisé par CCP / BaridiMob sera activé à la prochaine phase.",
+    "noPackageInfo": "Information de formule indisponible."
+  },
+  "checkout": {
+    "checkoutTitle": "Finaliser la commande",
+    "orderSummary": "Résumé de la commande",
+    "gig": "Service",
+    "package": "Formule",
+    "deliveryTime": "Délai de livraison",
+    "days": "jours",
+    "revisions": "Révisions",
+    "total": "Total à payer",
+    "requirementsLabel": "Instructions & Besoins",
+    "optional": "Optionnel",
+    "requirementsPlaceholder": "Donnez vos instructions au créateur (lien du produit, script souhaité, style vidéo...)",
+    "continueToPayment": "Continuer vers le paiement",
+    "processing": "Traitement en cours...",
+    "paymentTitle": "Paiement de la commande",
+    "paymentSubtitle": "Votre commande est réservée. Veuillez effectuer le transfert pour commencer le travail.",
+    "amountToPay": "Montant à transférer",
+    "platformAccountDetails": "Informations bancaires de la plateforme",
+    "accountName": "Nom du compte",
+    "paymentMethod": "Méthode de paiement utilisée",
+    "referenceNumber": "Numéro de référence du transfert",
+    "uploadReceipt": "Preuve de paiement (Reçu / Capture d'écran)",
+    "submitPayment": "Soumettre la preuve de paiement",
+    "fileRequiredError": "Le fichier de reçu est obligatoire."
+  },
+  "admin": {
+    "nav": {
+      "adminBadge": "Admin",
+      "dashboard": "Tableau de bord",
+      "escrow": "Paiements",
+      "deliveries": "Livraisons",
+      "payouts": "Retraits",
+      "gigs": "Services",
+      "logout": "Déconnexion"
+    },
+    "home": {
+      "title": "Tableau de bord admin",
+      "pendingEscrow": "Paiements en attente",
+      "pendingDeliveries": "Livraisons en attente de vérification",
+      "pendingPayouts": "Demandes de retrait en attente",
+      "activeGigs": "Services actifs",
+      "viewQueue": "Voir la file d'attente"
+    },
+    "payouts": {
+      "title": "Demandes de retrait",
+      "subtitle": "Traitez les demandes de retrait des créateurs vers leur compte CCP / BaridiMob.",
+      "empty": "Aucune demande de retrait en attente.",
+      "creator": "Créateur",
+      "amount": "Montant",
+      "method": "Méthode",
+      "account": "Compte",
+      "requestedAt": "Demandé le",
+      "markPaid": "Marquer comme payé",
+      "reject": "Rejeter",
+      "processing": "Traitement...",
+      "actionFailed": "Échec de l'action."
+    },
+    "gigsModeration": {
+      "title": "Modération des services",
+      "subtitle": "Désactivez un service en cas de problème.",
+      "empty": "Aucun service à afficher.",
+      "creator": "Créateur",
+      "status": "Statut",
+      "deactivate": "Désactiver",
+      "reactivate": "Réactiver",
+      "actionFailed": "Échec de l'action."
+    }
+  },
+  "creatorPayouts": {
+    "title": "Solde et retraits",
+    "availableBalance": "Solde disponible",
+    "pendingBalance": "Solde en attente (commandes en cours)",
+    "requestButton": "Demander un retrait",
+    "requestSuccess": "Demande de retrait envoyée avec succès.",
+    "noPayoutAccount": "Ajoutez d'abord un compte de paiement ci-dessus.",
+    "requesting": "Envoi en cours...",
+    "requestFailed": "Impossible de soumettre la demande.",
+    "minAmountError": "Le montant doit être positif et ne pas dépasser votre solde disponible.",
+    "history": "Historique des retraits",
+    "noHistory": "Aucune demande de retrait pour le moment.",
+    "status": {
+      "pending": "En attente",
+      "processing": "En cours de traitement",
+      "paid": "Payé",
+      "rejected": "Rejeté"
+    }
+  },
+  "notifications": {
+    "bellLabel": "Notifications",
+    "title": "Notifications",
+    "empty": "Aucune notification pour le moment.",
+    "events": {
+      "escrowConfirmed": {
+        "title": "Paiement confirmé",
+        "body": "Le paiement a été vérifié, la commande est maintenant en cours."
+      },
+      "escrowReleased": {
+        "title": "Fonds disponibles",
+        "body": "Les fonds de votre commande terminée sont maintenant disponibles dans votre solde."
+      },
+      "deliverySubmitted": {
+        "title": "Nouvelle livraison à vérifier",
+        "body": "Un créateur a soumis une livraison en attente de contrôle qualité."
+      },
+      "deliveryApproved": {
+        "title": "Livraison approuvée",
+        "body": "Votre commande a été livrée et validée par notre équipe."
+      },
+      "deliveryRejected": {
+        "title": "Révision requise",
+        "body": "Votre livraison nécessite une révision avant validation."
+      },
+      "orderCompleted": {
+        "title": "Commande terminée",
+        "body": "Le client a accepté la livraison finale."
+      },
+      "payoutProcessed": {
+        "title": "Paiement envoyé",
+        "body": "Votre demande de retrait de {amount} DZD a été traitée."
+      },
+      "reviewReceived": {
+        "title": "Nouvel avis reçu",
+        "body": "Vous avez reçu une note de {rating}/5."
+      },
+      "disputeOpened": {
+        "title": "Litige ouvert",
+        "body": "Un litige a été ouvert sur une commande."
+      }
+    }
+  },
+  "reviews": {
+    "leaveReview": "Laisser un avis",
+    "ratingLabel": "Note",
+    "commentLabel": "Commentaire (optionnel)",
+    "commentPlaceholder": "Partagez votre expérience...",
+    "submit": "Envoyer l'avis",
+    "submitting": "Envoi en cours...",
+    "submitFailed": "Impossible d'envoyer l'avis.",
+    "yourReview": "Votre avis",
+    "theirReview": "Avis reçu",
+    "errors": {
+      "ratingRequired": "Veuillez sélectionner une note.",
+      "already_reviewed": "Vous avez déjà laissé un avis pour cette commande."
+    }
+  },
+  "workspace": {
+    "status": {
+      "pending_payment": "Paiement en attente",
+      "in_progress": "En cours",
+      "pending_admin_review": "Vérification Admin",
+      "delivered": "Livré",
+      "revision_requested": "Révision demandée",
+      "completed": "Terminé",
+      "disputed": "En litige",
+      "cancelled": "Annulé"
+    },
+    "orderId": "Numéro de commande",
+    "requirements": "Instructions & Besoins",
+    "noRequirements": "Aucune instruction fournie.",
+    "deliverables": "Livrables",
+    "pendingAdminQC": "La vidéo a été livrée et est en cours de vérification par notre équipe de contrôle qualité. Vous y aurez accès dès qu'elle sera validée.",
+    "latestFile": "Dernier fichier livré :",
+    "downloadFile": "Télécharger / Voir le fichier",
+    "chat": "Messagerie",
+    "timeline": "Historique de la commande",
+    "adminViewOnly": "Vue admin (lecture seule)",
+    "reviewsTitle": "Avis",
+    "loadingMessages": "Chargement des messages...",
+    "noMessages": "Aucun message pour le moment. Dites bonjour !",
+    "typeMessage": "Écrivez votre message...",
+    "deliverWork": "Livrer le travail final",
+    "uploadVideo": "Téléverser la vidéo",
+    "changeFile": "Changer",
+    "selectFile": "Sélectionner un fichier",
+    "noteOptional": "Note au client (Optionnel)",
+    "notePlaceholder": "Décrivez ce que vous avez réalisé...",
+    "submitDelivery": "Soumettre la livraison",
+    "uploadFailed": "Erreur lors de l'envoi du fichier. Veuillez réessayer.",
+    "reviewDelivery": "Vérifier la livraison",
+    "creatorNote": "Note du créateur",
+    "accept": "Accepter la livraison",
+    "requestRevision": "Demander une révision",
+    "dispute": "Ouvrir un litige",
+    "reasonRequired": "Une raison est obligatoire pour demander une révision ou ouvrir un litige.",
+    "revisionReason": "Raison de la révision",
+    "disputeReason": "Motif du litige",
+    "reasonPlaceholder": "Expliquez ce qui doit être corrigé...",
+    "confirmAction": "Confirmer l'action"
+  }
+}

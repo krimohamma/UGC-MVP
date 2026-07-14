@@ -1,0 +1,423 @@
+{
+  "app": {
+    "name": "سوق"
+  },
+  "home": {
+    "heroTitle": "فيديوهات إعلانية أصيلة (UGC) لعلامتك التجارية",
+    "heroSubtitle": "سوق يربط العلامات التجارية الجزائرية بصناع محتوى موثوقين. اطلب فيديوهات إعلانية على طريقة تيك توك وادفع بأمان عبر حساب ضمان (escrow) يؤكده فريقنا.",
+    "ctaBrowse": "تصفح صناع المحتوى",
+    "ctaBecomeCreator": "كن منشئ محتوى",
+    "howItWorksBrandsTitle": "للعلامات التجارية",
+    "brandStep1Title": "تصفح واختر",
+    "brandStep1Desc": "قم بتصفية صناع المحتوى حسب المجال واللغة والميزانية، وشاهد أعمالهم السابقة قبل الطلب.",
+    "brandStep2Title": "ادفع بأمان",
+    "brandStep2Desc": "يُحفظ دفعك في حساب ضمان (CCP / بريدي موب) ويؤكده أحد المشرفين قبل بدء العمل.",
+    "brandStep3Title": "استلم ووافق",
+    "brandStep3Desc": "يقوم منشئ المحتوى بتسليم الفيديو، يتحقق فريقنا من الجودة، ثم توافق أنت أو تطلب تعديلاً.",
+    "howItWorksCreatorsTitle": "لصناع المحتوى",
+    "creatorStep1Title": "أنشئ ملفك الشخصي",
+    "creatorStep1Desc": "اعرض أسلوبك من خلال معرض أعمال يضم فيديوهات سابقة، مرفوعة أو مرتبطة من تيك توك/إنستغرام.",
+    "creatorStep2Title": "انشر خدماتك",
+    "creatorStep2Desc": "حدد عروضك (أساسية، قياسية، مميزة) مع الأسعار ومدة التسليم وعدد التعديلات المشمولة.",
+    "creatorStep3Title": "سلّم واحصل على أموالك",
+    "creatorStep3Desc": "بمجرد الموافقة على الطلب، اسحب أرباحك إلى حسابك البريدي الجاري أو بريدي موب.",
+    "featuredGigsTitle": "الخدمات الأكثر طلباً",
+    "featuredGigsEmpty": "خدمات جديدة قادمة قريباً.",
+    "viewAllGigs": "عرض جميع الخدمات",
+    "finalCtaTitle": "مستعد للبدء؟",
+    "finalCtaSubtitle": "انضم إلى منصة UGC المخصصة للجزائر.",
+    "finalCtaButton": "أنشئ حسابك مجاناً"
+  },
+  "errors": {
+    "title": "حدث خطأ ما",
+    "description": "حدث خطأ من جانبنا. يمكنك إعادة المحاولة أو العودة إلى الصفحة الرئيسية.",
+    "errorId": "المرجع",
+    "retry": "إعادة المحاولة",
+    "backHome": "العودة إلى الرئيسية",
+    "notFoundTitle": "الصفحة غير موجودة",
+    "notFoundDescription": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
+  },
+  "legal": {
+    "draftNotice": "وثيقة مؤقتة بانتظار المراجعة القانونية — لا تُعد بعد وثيقة قانونية نهائية."
+  },
+  "footer": {
+    "tagline": "منصة UGC للعلامات التجارية وصناع المحتوى في الجزائر.",
+    "browseGigs": "تصفح الخدمات",
+    "terms": "شروط الاستخدام",
+    "privacy": "الخصوصية"
+  },
+  "nav": {
+    "browseGigs": "تصفح الخدمات",
+    "dashboard": "لوحة التحكم",
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "logout": "تسجيل الخروج"
+  },
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "noAccount": "ليس لديك حساب؟",
+      "signupLink": "إنشاء حساب",
+      "checkEmailNotice": "تحقق من بريدك الإلكتروني لتأكيد حسابك، ثم سجّل الدخول.",
+      "forgotPasswordLink": "نسيت كلمة المرور؟",
+      "resetSuccessNotice": "تم تحديث كلمة المرور. يمكنك الآن تسجيل الدخول."
+    },
+    "forgotPassword": {
+      "title": "نسيت كلمة المرور",
+      "instructions": "أدخل بريدك الإلكتروني وسنرسل لك رابطاً لإعادة تعيين كلمة المرور.",
+      "emailLabel": "البريد الإلكتروني",
+      "submit": "إرسال رابط إعادة التعيين",
+      "checkEmailNotice": "إذا كان هناك حساب مرتبط بهذا البريد، فقد تم إرسال رسالة لإعادة تعيين كلمة المرور.",
+      "backToLogin": "العودة لتسجيل الدخول",
+      "errors": {
+        "invalidEmail": "البريد الإلكتروني غير صالح.",
+        "linkExpired": "رابط إعادة التعيين غير صالح أو منتهي الصلاحية. اطلب رابطاً جديداً."
+      }
+    },
+    "resetPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "newPasswordLabel": "كلمة المرور الجديدة",
+      "submit": "تحديث كلمة المرور",
+      "errors": {
+        "passwordTooShort": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.",
+        "updateFailed": "تعذر تحديث كلمة المرور. يرجى المحاولة مرة أخرى."
+      }
+    },
+    "signup": {
+      "title": "إنشاء حساب",
+      "displayName": "الاسم المعروض",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "role": "أنا...",
+      "roleCreator": "منشئ محتوى",
+      "roleBrand": "علامة تجارية / متجر",
+      "submit": "إنشاء الحساب",
+      "legalNotice": "بإنشائك للحساب، فإنك توافق على <terms>شروط الاستخدام</terms> و<privacy>سياسة الخصوصية</privacy> الخاصة بنا.",
+      "hasAccount": "لديك حساب بالفعل؟",
+      "loginLink": "تسجيل الدخول",
+      "errors": {
+        "required": "يرجى تعبئة جميع الحقول.",
+        "invalidEmail": "البريد الإلكتروني غير صالح.",
+        "passwordTooShort": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.",
+        "invalidRole": "يرجى اختيار دور صالح.",
+        "signupFailed": "فشل إنشاء الحساب. يرجى المحاولة مرة أخرى."
+      }
+    }
+  },
+  "dashboard": {
+    "creatorWelcome": "لوحة تحكم منشئ المحتوى",
+    "creatorSubtitle": "أدر ملفك الشخصي ومعرض أعمالك وعروض خدماتك الإعلانية.",
+    "brandWelcome": "مرحباً بك في سوق",
+    "brandSubtitle": "ابحث عن أفضل صناع المحتوى الإعلاني (UGC) لعلامتك التجارية في الجزائر.",
+    "exploreCreators": "تصفح صناع المحتوى",
+    "brandDescription": "اكتشف فيديوهات إعلانية حقيقية لحملاتك على تيك توك وإنستغرام.",
+    "browseGigsBtn": "تصفح الخدمات المتاحة",
+    "createNewGig": "إضافة خدمة جديدة",
+    "yourGigs": "عروض خدماتك",
+    "noGigsYet": "لم تقم بنشر أي خدمة بعد.",
+    "createFirstGig": "نشر أول خدمة لك",
+    "editGig": "تعديل"
+  },
+  "profile": {
+    "title": "الملف الشخصي لمنشئ المحتوى",
+    "noReviewsYet": "لا توجد تقييمات بعد",
+    "nicheLabel": "المجال / التخصص الرئيسي",
+    "bioLabel": "نبذة تعريفية",
+    "bioPlaceholder": "عرّف العلامات التجارية بنفسك وبأسلوبك في تصوير الفيديوهات الإعلانية...",
+    "experienceLabel": "سنوات الخبرة",
+    "saveProfile": "حفظ الملف الشخصي",
+    "profileSaved": "تم تحديث الملف الشخصي بنجاح!",
+    "saveFailed": "حدث خطأ أثناء الحفظ.",
+    "saving": "جاري الحفظ...",
+    "payoutTitle": "حساب سحب الأرباح",
+    "payoutSubtitle": "بيانات الحساب البريدي الجاري CCP أو بريدي موب لاستلام المستحقات.",
+    "methodLabel": "طريقة الدفع",
+    "accountHolder": "اسم صاحب الحساب",
+    "accountHolderPlaceholder": "الاسم الكامل كما يظهر في الصك البريدي أو RIP",
+    "accountNumber": "رقم الحساب (CCP أو RIP بريدي موب)",
+    "accountNumberPlaceholder": "مثال: 00799999000000000000 أو RIP بريدي موب",
+    "savePayout": "حفظ بيانات الدفع",
+    "payoutSaved": "تم حفظ بيانات الدفع بنجاح!",
+    "errors": {
+      "nicheRequired": "يرجى اختيار المجال.",
+      "required": "هذا الحقل مطلوب.",
+      "digitsOnly": "يجب أن يحتوي على أرقام ومسافات فقط."
+    }
+  },
+  "portfolio": {
+    "addTitle": "إضافة عمل لمعرض الأعمال",
+    "addSubtitle": "اعرض نماذج من فيديوهاتك السابقة لجذب المشترين.",
+    "itemTitle": "عنوان المشروع (اختياري)",
+    "itemTitlePlaceholder": "مثال: فيديو إعلاني لمنتج العناية بالبشرة",
+    "sourceType": "نوع المحتوى",
+    "uploadVideo": "رفع فيديو",
+    "externalLink": "رابط تيك توك / إنستغرام",
+    "selectVideoFile": "ملف الفيديو أو الصورة",
+    "uploadLimitNotice": "الصيغ المدعومة: MP4, MOV, WebM, WebP, PNG, JPG (الحد الأقصى 100 ميجابايت)",
+    "linkUrl": "رابط الفيديو الأصلي",
+    "addItem": "إضافة إلى المعرض",
+    "adding": "جاري الإضافة...",
+    "addFailed": "تعذر إضافة النموذج.",
+    "yourPortfolio": "معرض أعمالك",
+    "emptyPortfolio": "لا توجد نماذج في معرض أعمالك حاليًا.",
+    "untitledItem": "نموذج فيديو",
+    "externalBadge": "رابط خارجي",
+    "uploadBadge": "ملف مرفوع",
+    "delete": "حذف",
+    "confirmDelete": "هل أنت تأكد من حذف هذا النموذج من معرض أعمالك؟",
+    "errors": {
+      "validUrlRequired": "يرجى أدخال رابط صحيح (http/https)."
+    }
+  },
+  "gigForm": {
+    "createGigTitle": "إضافة خدمة إعلانية جديدة",
+    "editGigTitle": "تعديل الخدمة",
+    "generalSection": "المعلومات العامة",
+    "titleLabel": "عنوان الخدمة",
+    "titlePlaceholder": "مثال: سأقوم بتصوير فيديو إعلاني جذاب لمنتجك التقني",
+    "nicheLabel": "المجال",
+    "languagesLabel": "اللغة المستخدمة في الفيديو",
+    "descriptionLabel": "وصف الخدمة التفصيلي",
+    "descriptionPlaceholder": "اشرح بالتفصيل طريقة تنفيذ الخدمة وما سيحصل عليه المشتري...",
+    "coverLabel": "صورة الغلاف (اختياري)",
+    "statusLabel": "حالة الخدمة",
+    "statusDraft": "مسودة (مخفية)",
+    "statusActive": "نشطة (ظاهرة)",
+    "statusPaused": "متوقفة مؤقتاً",
+    "packagesSection": "الباقات والأسعار (3 باقات)",
+    "packagesNotice": "يجب إعداد الباقات الثلاث (أساسية، قياسية، مميزة). الأسعار بالدينار الجزائري بدون كسور.",
+    "pkgTitle": "عنوان الباقة",
+    "pkgDesc": "وصف سريع",
+    "priceDzd": "السعر (د.ج)",
+    "deliveryDays": "مدة التسليم (أيام)",
+    "revisions": "التعديلات",
+    "cancel": "إلغاء",
+    "saveGig": "حفظ الخدمة",
+    "saving": "جاري الحفظ...",
+    "submitFailed": "تعذر حفظ الخدمة.",
+    "errors": {
+      "languageRequired": "اختر لغة واحدة على الأقل.",
+      "noDecimalsAllowed": "لا تقبل الكسور. السعر بالدينار الصحيح فقط."
+    }
+  },
+  "gigs": {
+    "browseTitle": "تصفح الخدمات الإعلانية",
+    "browseSubtitle": "اطلب فيديوهات إعلانية مخصصة لمنتجاتك من صناع محتوى جزائريين.",
+    "browseEmpty": "لا توجد خدمات تطابق خيارات البحث الحالية.",
+    "filterNiche": "المجال",
+    "allNiches": "جميع المجالات",
+    "filterLanguage": "لغة المحتوى",
+    "allLanguages": "جميع اللغات",
+    "priceRange": "السعر (د.ج)",
+    "maxDelivery": "مدة التسليم",
+    "anyTime": "جميع المدد",
+    "resetFilters": "إعادة ضبط التصفية"
+  },
+  "gigDetail": {
+    "descriptionTitle": "عن هذه الخدمة",
+    "ordersCompleted": "الطلبات المكتملة",
+    "experience": "الخبرة",
+    "years": "سنوات",
+    "portfolioTitle": "نماذج من أعمال منشئ المحتوى",
+    "deliveryTime": "مدة التسليم",
+    "revisions": "التعديلات المشمولة",
+    "days": "أيام",
+    "whatsIncluded": "ما تشمله الباقة",
+    "orderNow": "طلب هذه الخدمة",
+    "phase3Notice": "متاح في المرحلة 3",
+    "orderNote": "سيتم تفعيل الدفع الآمن عبر CCP / بريدي موب في المرحلة القادمة.",
+    "noPackageInfo": "معلومات الباقة غير متوفرة."
+  },
+  "checkout": {
+    "checkoutTitle": "إتمام الطلب",
+    "orderSummary": "ملخص الطلب",
+    "gig": "الخدمة",
+    "package": "الباقة",
+    "deliveryTime": "مدة التسليم",
+    "days": "أيام",
+    "revisions": "التعديلات",
+    "total": "الإجمالي",
+    "requirementsLabel": "التعليمات والمتطلبات",
+    "optional": "اختياري",
+    "requirementsPlaceholder": "أضف تعليماتك لمنشئ المحتوى (رابط المنتج، السيناريو المطلوب، أسلوب الفيديو...)",
+    "continueToPayment": "المتابعة للدفع",
+    "processing": "جاري المعالجة...",
+    "paymentTitle": "دفع قيمة الطلب",
+    "paymentSubtitle": "تم حجز طلبك بنجاح. يرجى إتمام عملية التحويل للبدء في العمل.",
+    "amountToPay": "المبلغ المطلوب تحويله",
+    "platformAccountDetails": "تفاصيل الحساب البنكي للمنصة",
+    "accountName": "اسم الحساب",
+    "paymentMethod": "طريقة الدفع المستخدمة",
+    "referenceNumber": "رقم مرجع التحويل (رقم الوصل)",
+    "uploadReceipt": "إثبات الدفع (وصل التحويل أو لقطة شاشة)",
+    "submitPayment": "إرسال إثبات الدفع",
+    "fileRequiredError": "ملف إثبات الدفع مطلوب."
+  },
+  "admin": {
+    "nav": {
+      "adminBadge": "المشرف",
+      "dashboard": "لوحة التحكم",
+      "escrow": "المدفوعات",
+      "deliveries": "التسليمات",
+      "payouts": "طلبات السحب",
+      "gigs": "الخدمات",
+      "logout": "تسجيل الخروج"
+    },
+    "home": {
+      "title": "لوحة تحكم المشرف",
+      "pendingEscrow": "مدفوعات بانتظار التأكيد",
+      "pendingDeliveries": "تسليمات بانتظار المراجعة",
+      "pendingPayouts": "طلبات سحب بانتظار المعالجة",
+      "activeGigs": "الخدمات النشطة",
+      "viewQueue": "عرض القائمة"
+    },
+    "payouts": {
+      "title": "طلبات سحب الأرباح",
+      "subtitle": "عالج طلبات سحب أرباح صناع المحتوى إلى حساباتهم البريدية (CCP / بريدي موب).",
+      "empty": "لا توجد طلبات سحب بانتظار المعالجة.",
+      "creator": "منشئ المحتوى",
+      "amount": "المبلغ",
+      "method": "الطريقة",
+      "account": "الحساب",
+      "requestedAt": "تاريخ الطلب",
+      "markPaid": "تأكيد الدفع",
+      "reject": "رفض",
+      "processing": "جاري المعالجة...",
+      "actionFailed": "فشل تنفيذ الإجراء."
+    },
+    "gigsModeration": {
+      "title": "مراقبة الخدمات",
+      "subtitle": "قم بإلغاء تفعيل خدمة في حال وجود مشكلة.",
+      "empty": "لا توجد خدمات لعرضها.",
+      "creator": "منشئ المحتوى",
+      "status": "الحالة",
+      "deactivate": "إلغاء التفعيل",
+      "reactivate": "إعادة التفعيل",
+      "actionFailed": "فشل تنفيذ الإجراء."
+    }
+  },
+  "creatorPayouts": {
+    "title": "الرصيد وطلبات السحب",
+    "availableBalance": "الرصيد المتاح",
+    "pendingBalance": "الرصيد قيد الانتظار (طلبات جارية)",
+    "requestButton": "طلب سحب",
+    "requestSuccess": "تم إرسال طلب السحب بنجاح.",
+    "noPayoutAccount": "أضف حساب دفع أولاً في الأعلى.",
+    "requesting": "جاري الإرسال...",
+    "requestFailed": "تعذر إرسال الطلب.",
+    "minAmountError": "يجب أن يكون المبلغ موجباً ولا يتجاوز رصيدك المتاح.",
+    "history": "سجل طلبات السحب",
+    "noHistory": "لا توجد طلبات سحب حتى الآن.",
+    "status": {
+      "pending": "قيد الانتظار",
+      "processing": "قيد المعالجة",
+      "paid": "مدفوع",
+      "rejected": "مرفوض"
+    }
+  },
+  "notifications": {
+    "bellLabel": "الإشعارات",
+    "title": "الإشعارات",
+    "empty": "لا توجد إشعارات حاليًا.",
+    "events": {
+      "escrowConfirmed": {
+        "title": "تم تأكيد الدفع",
+        "body": "تم التحقق من الدفع، والطلب الآن قيد التنفيذ."
+      },
+      "escrowReleased": {
+        "title": "الأموال متاحة الآن",
+        "body": "أصبحت أموال طلبك المكتمل متاحة الآن في رصيدك."
+      },
+      "deliverySubmitted": {
+        "title": "تسليم جديد بانتظار المراجعة",
+        "body": "قام أحد صناع المحتوى بتقديم تسليم بانتظار مراجعة الجودة."
+      },
+      "deliveryApproved": {
+        "title": "تمت الموافقة على التسليم",
+        "body": "تم تسليم طلبك والموافقة عليه من طرف فريقنا."
+      },
+      "deliveryRejected": {
+        "title": "مطلوب تعديل",
+        "body": "يتطلب تسليمك تعديلاً قبل الموافقة عليه."
+      },
+      "orderCompleted": {
+        "title": "اكتمل الطلب",
+        "body": "وافق العميل على التسليم النهائي."
+      },
+      "payoutProcessed": {
+        "title": "تم إرسال الدفعة",
+        "body": "تمت معالجة طلب سحب أرباحك البالغ {amount} دج."
+      },
+      "reviewReceived": {
+        "title": "تقييم جديد",
+        "body": "لقد تلقيت تقييماً بـ {rating}/5."
+      },
+      "disputeOpened": {
+        "title": "تم فتح نزاع",
+        "body": "تم فتح نزاع بخصوص أحد الطلبات."
+      }
+    }
+  },
+  "reviews": {
+    "leaveReview": "أضف تقييمًا",
+    "ratingLabel": "التقييم",
+    "commentLabel": "تعليق (اختياري)",
+    "commentPlaceholder": "شاركنا تجربتك...",
+    "submit": "إرسال التقييم",
+    "submitting": "جاري الإرسال...",
+    "submitFailed": "تعذر إرسال التقييم.",
+    "yourReview": "تقييمك",
+    "theirReview": "التقييم المستلم",
+    "errors": {
+      "ratingRequired": "يرجى اختيار تقييم.",
+      "already_reviewed": "لقد قمت بالفعل بتقييم هذا الطلب."
+    }
+  },
+  "workspace": {
+    "status": {
+      "pending_payment": "في انتظار الدفع",
+      "in_progress": "قيد التنفيذ",
+      "pending_admin_review": "قيد المراجعة الإدارية",
+      "delivered": "تم التسليم",
+      "revision_requested": "مطلوب تعديل",
+      "completed": "مكتمل",
+      "disputed": "متنازع عليه",
+      "cancelled": "ملغى"
+    },
+    "orderId": "رقم الطلب",
+    "requirements": "التعليمات والمتطلبات",
+    "noRequirements": "لم يتم تقديم تعليمات.",
+    "deliverables": "التسليمات",
+    "pendingAdminQC": "تم تسليم الفيديو وهو قيد المراجعة من قبل فريق ضبط الجودة لدينا. ستتمكن من الوصول إليه بمجرد الموافقة عليه.",
+    "latestFile": "أحدث ملف تم تسليمه:",
+    "downloadFile": "تنزيل / عرض الملف",
+    "chat": "الدردشة",
+    "timeline": "سجل الطلب",
+    "adminViewOnly": "عرض المشرف (للقراءة فقط)",
+    "reviewsTitle": "التقييمات",
+    "loadingMessages": "جاري تحميل الرسائل...",
+    "noMessages": "لا توجد رسائل حتى الآن. قل مرحباً!",
+    "typeMessage": "اكتب رسالتك...",
+    "deliverWork": "تسليم العمل النهائي",
+    "uploadVideo": "رفع الفيديو",
+    "changeFile": "تغيير",
+    "selectFile": "تحديد ملف",
+    "noteOptional": "ملاحظة للعميل (اختياري)",
+    "notePlaceholder": "صف ما قمت بتنفيذه...",
+    "submitDelivery": "تأكيد التسليم",
+    "uploadFailed": "فشل رفع الملف. يرجى المحاولة مرة أخرى.",
+    "reviewDelivery": "مراجعة التسليم",
+    "creatorNote": "ملاحظة منشئ المحتوى",
+    "accept": "قبول التسليم",
+    "requestRevision": "طلب تعديل",
+    "dispute": "فتح نزاع",
+    "reasonRequired": "مطلوب ذكر سبب لطلب التعديل أو فتح النزاع.",
+    "revisionReason": "سبب التعديل",
+    "disputeReason": "سبب النزاع",
+    "reasonPlaceholder": "اشرح ما يحتاج إلى تصحيح...",
+    "confirmAction": "تأكيد الإجراء"
+  }
+}
