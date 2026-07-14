@@ -109,6 +109,13 @@
         "signupFailed": "L'inscription a échoué. Veuillez réessayer.",
         "confirmationExpired": "Ce lien de confirmation est invalide ou a déjà été utilisé. Inscrivez-vous à nouveau ou essayez de vous connecter."
       }
+    },
+    "confirm": {
+      "recoveryTitle": "Réinitialiser votre mot de passe",
+      "recoveryButton": "Réinitialiser mon mot de passe",
+      "signupTitle": "Confirmer votre compte",
+      "signupButton": "Confirmer mon compte",
+      "instructions": "Cliquez sur le bouton ci-dessous pour continuer. Ce clic est nécessaire pour votre sécurité — certains services de messagerie ouvrent automatiquement les liens et cela ne doit pas confirmer votre demande à votre place."
     }
   },
   "dashboard": {

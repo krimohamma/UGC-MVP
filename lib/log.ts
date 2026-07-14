@@ -32,12 +32,20 @@ export function logMoneyEvent(event: {
  * verifyOtp failures were indistinguishable from each other in the redirect
  * alone (expired vs. already-used vs. wrong type) — grep `AUTH_EVENT` in
  * Vercel's log viewer.
+ *
+ * `confirmRender` (GET, never calls verifyOtp) and `confirmRedeem` (POST,
+ * the only place verifyOtp is called) are logged separately so an email
+ * scanner's prefetch (a GET with no matching POST) is visible in the logs
+ * as distinct from a real user completing the flow — never log `token_hash`
+ * itself, only whether the expected params were present.
  */
 export function logAuthEvent(event: {
-  action: "confirmEmailLink" | "signupProfileInsert";
+  action: "confirmRender" | "confirmRedeem" | "signupProfileInsert";
   outcome: "success" | "failure";
   otpType?: string;
   next?: string;
+  hasTokenHash?: boolean;
+  userAgent?: string;
   error?: string;
   errorCode?: string;
 }) {
